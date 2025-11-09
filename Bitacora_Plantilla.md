@@ -49,6 +49,10 @@
 - `Dificultad 1`  
 - `Dificultad 2`
 
+
+
+https://docs.google.com/document/d/1tQEUGjiX1Xg4Abq63Ybi6_u50xYSfCF8WkgYHlMg034/edit?usp=sharing
+
 **`Próximos Pasos:`**
 
 - `Próximo paso 1`  
