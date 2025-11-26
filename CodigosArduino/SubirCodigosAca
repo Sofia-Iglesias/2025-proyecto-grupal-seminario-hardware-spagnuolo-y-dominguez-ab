@@ -1,1 +1,55 @@
+// C++ code
+//
+#include <Servo.h>
+#define TRIG_PERSONA 2
+#define ECHO_PERSONA 3
+#define TRIG_TACHO 4
+#define ECHO_TACHO 5
+#define LED_VERDE 6
+#define LED_ROJO 7
+#define SERVO_PIN 9
 
+Servo tapa;
+
+void setup() {
+  tapa.attach(SERVO_PIN);
+  tapa.write(0);
+  
+  pinMode(TRIG_PERSONA, OUTPUT);
+  pinMode(ECHO_PERSONA, INPUT);
+  pinMode(TRIG_TACHO, OUTPUT);
+  pinMode(ECHO_TACHO, INPUT);
+  pinMode(LED_VERDE, OUTPUT);
+  pinMode(LED_ROJO, OUTPUT);
+}
+
+long medirDistancia(int trig, int echo) {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  long duracion = pulseIn(echo, HIGH);
+  long distancia = duracion * 0.034 / 2;
+  return distancia;
+}
+
+void loop() {
+  long distanciaPersona = medirDistancia(TRIG_PERSONA, ECHO_PERSONA);
+  long distanciaTacho = medirDistancia(TRIG_TACHO, ECHO_TACHO);
+  
+  if (distanciaPersona < 20) {
+    tapa.write(90);
+    delay(3000);
+    tapa.write(0);
+   }
+  if (distanciaTacho < 8) { 
+     digitalWrite(LED_ROJO, HIGH);
+    digitalWrite(LED_VERDE, LOW);
+  } else {
+    digitalWrite(LED_ROJO, LOW);
+    digitalWrite(LED_VERDE, HIGH);
+  }
+
+  delay(500);
+}
