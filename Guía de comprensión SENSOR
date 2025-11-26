@@ -1,0 +1,98 @@
+Guia de componentes 
+
+Sensor
+
+Clara Dominguez Fainberg y Carolina Spagnuolo
+
+Sofia Iglesias
+
+4to Bimestre 
+
+2025
+SENSOR
+
+
+1. ¿Qué tipo de dispositivo es (sensor o actuador)? Explicá brevemente su función principal.
+
+Son dos sensores ultrasónicos → El sensor emite una onda sonora a una frecuencia específica. Luego escucha esa misma onda sonora cuando rebota en un objeto y regresa ,  El sensor registra el tiempo que transcurre entre el envío de la onda sonora y la recepción del eco. Si sabes qué tan rápido se mueve algo y cuánto tiempo viaja, puedes encontrar la distancia recorrida con la ecuación 1.
+Ecuación 1. d = v × t
+
+Sensor1→ se encuentra en la parte exterior del tacho y detecta la presencia de la mano cuando quiere tirar algo al tacho
+sensor2  → se encuentra en la parte interior del tacho y detecta si el tacho está lleno
+
+2. ¿Qué tipo de señal utiliza para comunicarse con Arduino?  
+
+Utiliza una señal digital. El Arduino envía un pulso al pin TRIG y el sensor responde con una señal en el pin ECHO que pasa a HIGH mientras el sonido viaja y vuelve a LOW cuando el eco regresa. El tiempo que el pin ECHO permanece en HIGH indica la distancia medida.
+
+3. ¿Cuál es el rango de valores que puede entregar o recibir el componente?  
+
+Entrega una señal digital. El sensor puede medir distancias entre aproximadamente 2 cm y 400 cm, con una resolución cercana a 3 mm. El Arduino interpreta el dato midiendo el tiempo que el pin ECHO permanece en HIGH, y con ese valor calcula la distancia recorrida por el sonido.
+
+4. ¿Qué pines de conexión tiene el componente? Enumerar y describir su función.  
+
+El sensor HCSR04 tiene cuatro pines: VCC, GND, TRIG y ECHO.
+VCC y GND alimentan el sensor con +5 V y tierra.
+
+
+TRIG envía la señal ultrasónica: se pone en HIGH por 10 µs y el sensor emite una ráfaga de sonido a 40 kHz.
+
+
+ECHO recibe la señal reflejada y sirve para medir la distancia.
+
+
+Cuando se envía la ráfaga, el pin ECHO pasa a HIGH y permanece así hasta que el eco regresa, momento en que vuelve a LOW. El tiempo que ECHO está en HIGH indica cuánto tardó el sonido en ir y volver, y con eso se calcula la distancia usando la ecuación d = v × t.
+
+5. ¿Qué pin o pines de Arduino utilizan para conectarlo? ¿Por qué elegiste esos pines?  
+
+Para conectarlo se utilizan los siguientes pines de arduino,  se utilizan cualquier  pin digital, tierra y 5v 
+
+6. Dibujá y explicá brevemente el esquema de conexión del componente con Arduino (incluyendo resistencias si son necesarias).  
+
+VCC → pin 5V del Arduino.  (energia)
+
+
+GND → GND del Arduino. (tierra)
+
+
+TRIG→ pin digital x del Arduino. (cualquiera)
+
+
+ECHO → pin digital x (cualquiera)
+
+
+7. ¿Cuál es el principio de funcionamiento del componente?  
+
+
+El sensor envía un pulso ultrasónico desde el pin TRIG. La onda choca con un objeto y vuelve al sensor, que la recibe en el pin ECHO.
+Midiendo el tiempo de ida y vuelta del sonido, el Arduino calcula la distancia al objeto.
+
+8. ¿Utiliza alguna librería particular para programarlo?  
+
+No, no utiliza ninguna libreria
+
+9. ¿Cómo se interpreta el dato de entrada o salida del componente en el programa?  
+
+El Arduino interpreta la señal midiendo el tiempo que el pin ECHO permanece en estado HIGH mediante la función “pulseIn”, y con ese valor calcula la distancia usando la fórmula:
+distancia = (tiempo × 0.0343) / 2.
+
+10. ¿Qué limitaciones o precauciones eléctricas hay que tener en cuenta?  
+
+Se debe respetar la conexión a 5 V y GND. No requiere resistencias
+
+11. ¿Cómo verificarías que el componente funciona correctamente antes de incorporarlo al proyecto final?  
+
+Hacer la simulación en tinkercad y que funcione correctamente, si es asi, conecto todo exactamente igual y debería funcionar
+
+12. Simular en Tinkercad e incluir el link de la simulación.   
+
+https://www.tinkercad.com/things/aGEOHkeon0g/editel?returnTo=%2Fdashboard
+
+
+13. En caso de aplicar, ¿qué valor o lectura esperás obtener en la simulación si el componente funciona correctamente?  
+
+El sensor ultrasónico debe mostrar lecturas de distancia en centímetros.
+
+14. ¿Cómo podría fallar el componente o cómo detectarías un mal funcionamiento en el código o en el circuito?
+
+El componente podria fallar al estar mal conectado a cualquiera de sus 4 pines, para detectarlo lo puedo informar en el serial port
+
